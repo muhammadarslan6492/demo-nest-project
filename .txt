@@ -1,0 +1,6 @@
+    constructor(
+        @Inject(REPOSITORY.INVOICE_REPOSITORY) private repository: Repository<Invoice>,
+        @Inject(REPOSITORY.PAYMENT_TERM_REPOSITORY) private paymentTermRepository: Repository<PaymentTerm>,
+        @Inject(INJECTION_TOKEN.DATA_SOURCE) private dataSource: DataSource,
+        private cacheService: CacheService,
+    ) {}
