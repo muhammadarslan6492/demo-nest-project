@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  database:
+    image: registry-1.docker.io/library/postgres:14
+    container_name: demo_db
+    environment:
+      POSTGRES_USER: nestjs
+      POSTGRES_PASSWORD: nestjs
+      POSTGRES_DB: nestjs
+    ports:
+      - '5433:5432'
+    volumes:
+      - ./volumes/data/postgres:/var/lib/postgresql/data
+    networks:
+      - demo
+
+  cache:
+    image: redis:6.2-alpine
+    container_name: demo_cache
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass redis-local-pass
+    volumes:
+      - ./volumes/data/redis:/data
+    networks:
+      - demo
+
+networks:
+  demo: {}
